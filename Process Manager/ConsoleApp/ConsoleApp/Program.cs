@@ -5,22 +5,22 @@ using ConsoleApp;
 
 class Program
 {
-    bool doItAngin;
+    private bool _doItAngin;
 
-    static void Main(string[] args)
+    public static void Main(string[] args)
     {
-        Program program = new Program();
+        var program = new Program();
         program.NewMethod();
     }
 
     private void NewMethod()
     {
-        doItAngin = true;
+        _doItAngin = true;
 
         
         do
         {
-            Console.WriteLine("1：先来先服务调度算法，2：短作业优先调度算法，3：优先级调度算法, 退出：Exit");
+            Console.WriteLine("1：先来先服务调度算法，2：短作业优先调度算法，3：优先级调度算法, 退出：exit");
             string input = Console.ReadLine();
             switch (input)
             {
@@ -43,12 +43,12 @@ class Program
                     ProcessManager.Instance.StartPF();
                     break;
                 case "exit":
-                    doItAngin = false;
+                    _doItAngin = false;
                     break;
                 default:
                     Console.WriteLine("输入错误，请输入三个数字之一或exit");
                     break;
             }
-        } while (doItAngin);
+        } while (_doItAngin);
     }
 }

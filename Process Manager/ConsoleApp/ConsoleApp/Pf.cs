@@ -3,7 +3,7 @@
 using System;
 using System.Collections.Generic;
 
-class Pf : Singleton<Pf>//优先级算法
+class Pf : Singleton<Pf> //优先级算法
 {
     private readonly Comparison<Process> _pfReachTimeComparison = PfReachTimeCompare;
 
@@ -11,13 +11,13 @@ class Pf : Singleton<Pf>//优先级算法
 
     private static int PfPriorityAndReachTimeCompare(Process x, Process y)
     {
-        if (x.processPCB.priority != y.processPCB.priority)//若优先级不等，则先比较优先级
+        if (x.processPCB.priority != y.processPCB.priority) //若优先级不等，则先比较优先级
         {
             return y.processPCB.priority.CompareTo(x.processPCB.priority);
         }
         else
         {
-            return x.processPCB.reachTime.CompareTo(y.processPCB.reachTime);//否则比较到达时间
+            return x.processPCB.reachTime.CompareTo(y.processPCB.reachTime); //否则比较到达时间
         }
     }
 
@@ -25,13 +25,13 @@ class Pf : Singleton<Pf>//优先级算法
     private readonly List<Process> _pfAftprocesses = new List<Process>();
 
     private List<Process> _proc = ProcessManager.Instance.Processes;
-    Process? _runningProcess;
-    Process? _startProcess;
-    private  readonly  List<Process> _blockList = new List<Process>();
+    private Process? _runningProcess;
+    private Process? _startProcess;
+    private readonly List<Process> _blockList = new List<Process>();
 
     private static int PfReachTimeCompare(Process x, Process y)
     {
-        return x.processPCB.reachTime.CompareTo(y.processPCB.reachTime);//根据到达时间比较
+        return x.processPCB.reachTime.CompareTo(y.processPCB.reachTime); //根据到达时间比较
     }
 
     public void Init()
@@ -55,22 +55,22 @@ class Pf : Singleton<Pf>//优先级算法
             pCB.priority = int.Parse(nums[3]);
             pCB.restTime = pCB.needTime;
 
-          
+
             ProcessManager.Instance.Processes.Add(new Process(pCB));
         }
 
-        Console.WriteLine("抢占式？（Y/N）");//是否为抢占式的优先级算法
+        Console.WriteLine("抢占式？（Y/N）"); //是否为抢占式的优先级算法
         t = Console.ReadLine();
         if (t == "Y")
         {
             ProcessManager.Instance.PfPreemptive = true;
             for (int i = 0; i < _proc.Count; i++)
             {
-                _proc[i].processPCB.state = PCB.Status.Ready;//把每一个进程的状态修改为准备态
+                _proc[i].processPCB.state = PCB.Status.Ready; //把每一个进程的状态修改为准备态
             }
         }
 
-        ProcessManager.Instance.Processes.Sort(_pfReachTimeComparison);//先根据到达时间进行一次排序
+        ProcessManager.Instance.Processes.Sort(_pfReachTimeComparison); //先根据到达时间进行一次排序
 
         ProcessManager.Instance.nowTime = 0;
     }
@@ -83,7 +83,7 @@ class Pf : Singleton<Pf>//优先级算法
             return;
         }
 
-        for (int m = 0; m < _proc.Count; m++)//每次在更新当前时间后再重新组织一次Pre和Aft列表
+        for (int m = 0; m < _proc.Count; m++) //每次在更新当前时间后再重新组织一次Pre和Aft列表
         {
             for (int i = 0; i < _proc.Count; i++)
             {
@@ -100,7 +100,7 @@ class Pf : Singleton<Pf>//优先级算法
 
             _pfPreprocesses.Sort(_pfPriorityAndReachTimeComparison); //  当前需要运行的的按优先级和到达时间排
             _pfAftprocesses.Sort(_pfReachTimeComparison); //  正在排队的按到达时间排
-            
+
             if (_pfPreprocesses.Count != 0)
             {
                 //  运行Pre列表第一个
@@ -110,7 +110,7 @@ class Pf : Singleton<Pf>//优先级算法
                     {
                         _proc[k].processPCB.startTime = ProcessManager.Instance.nowTime;
                         _proc[k].processPCB.finishTime = _proc[k].processPCB.startTime + _proc[k].processPCB.needTime;
-                        ProcessManager.Instance.nowTime = _proc[k].processPCB.finishTime;//更新nowtime
+                        ProcessManager.Instance.nowTime = _proc[k].processPCB.finishTime; //更新nowtime
                         break;
                     }
                 }
@@ -157,7 +157,7 @@ class Pf : Singleton<Pf>//优先级算法
 
     private void RunProcess(Process process)
     {
-        Console.WriteLine($"进程{process.processPCB.id}在{ ProcessManager.Instance.nowTime}时刻开始运行");
+        Console.WriteLine($"进程{process.processPCB.id}在{ProcessManager.Instance.nowTime}时刻开始运行");
         _runningProcess = process;
         if (_runningProcess.processPCB.startTime == 0 && _runningProcess.processPCB.id != _startProcess.processPCB.id)
         {
@@ -222,9 +222,9 @@ class Pf : Singleton<Pf>//优先级算法
                 && _pfAftprocesses[i].processPCB.priority >
                 _runningProcess.processPCB.priority) //  不等正在运行进程执行完新进程就会进入且新进程优先级更高
             {
-                _runningProcess.processPCB.restTime = _runningProcess.processPCB.restTime -
-                                                      (_pfAftprocesses[i].processPCB.reachTime -
-                                                       _runningProcess.processPCB.startTime);//当前线程被抢占，跟新 restTime
+                _runningProcess.processPCB.restTime -=
+                    (_pfAftprocesses[i].processPCB.reachTime -
+                     _runningProcess.processPCB.startTime); //当前线程被抢占，更新 restTime
                 _runningProcess.processPCB.state = PCB.Status.Block;
                 _blockList.Add(_runningProcess);
                 Console.WriteLine(
@@ -235,7 +235,7 @@ class Pf : Singleton<Pf>//优先级算法
 
                 for (int n = 0; n < _proc.Count; n++)
                 {
-                    if (_proc[n].processPCB.id == _pfAftprocesses[i].processPCB.id)//查找到此进程的id，更换当前的runningProcess
+                    if (_proc[n].processPCB.id == _pfAftprocesses[i].processPCB.id) //查找到此进程的id，更换当前的runningProcess
                     {
                         _runningProcess = _proc[n];
                         break;
@@ -243,8 +243,8 @@ class Pf : Singleton<Pf>//优先级算法
                 }
 
                 _runningProcess.processPCB.state = PCB.Status.Runing;
-                ProcessManager.Instance.nowTime = _runningProcess.processPCB.reachTime;//更新nowTime为此抢占进程的到达时间
-                ReFresh();//刷新Pre和Aft列表
+                ProcessManager.Instance.nowTime = _runningProcess.processPCB.reachTime; //更新nowTime为此抢占进程的到达时间
+                ReFresh(); //刷新Pre和Aft列表
                 return true;
             }
             else if ((_pfAftprocesses[i].processPCB.reachTime
@@ -254,9 +254,9 @@ class Pf : Singleton<Pf>//优先级算法
             {
                 for (int n = 0; n < _proc.Count; n++)
                 {
-                    if (_proc[n].processPCB.id == _pfAftprocesses[i].processPCB.id)//总进程中寻找到该进程的id
+                    if (_proc[n].processPCB.id == _pfAftprocesses[i].processPCB.id) //总进程中寻找到该进程的id
                     {
-                        _proc[n].processPCB.state = PCB.Status.Block;//修改该进程的状态
+                        _proc[n].processPCB.state = PCB.Status.Block; //修改该进程的状态
                         _blockList.Add(_proc[n]);
                         Console.WriteLine($"进程{_proc[n].processPCB.id}在时刻{_proc[n].processPCB.reachTime}尝试抢断失败，进入阻塞状态"
                         );

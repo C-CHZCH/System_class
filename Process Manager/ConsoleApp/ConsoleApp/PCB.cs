@@ -1,4 +1,5 @@
 ﻿namespace ConsoleApp;
+
 class PCB
 {
     public string id; //  进程ID
@@ -15,7 +16,7 @@ class PCB
 
     public float restTime; //  剩余时间
 
-    public int priority;//优先级
+    public int priority; //优先级
 
     public enum Status
     {
