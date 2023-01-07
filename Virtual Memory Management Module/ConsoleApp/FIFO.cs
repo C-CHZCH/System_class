@@ -49,7 +49,7 @@ public class FIFO
             }
             else
             {
-                Console.WriteLine("表中还有此数据");
+                Console.WriteLine("页面中还有此数据");
             }
 
             index++;

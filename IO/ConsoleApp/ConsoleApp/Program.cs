@@ -4,15 +4,16 @@ class Program
 {
     public static void Main(string[] args)
     {
-        string example = @""" A 55
-        B 58
-        C 39
-        D 18
-        E 90
-        F 160
-        G 150
-        H 38
-        I 184
+        string example = @""" 
+A 55
+B 58
+C 39
+D 18
+E 90
+F 160
+G 150
+H 38
+I 184
         """;
         
         bool doItAngin = true;

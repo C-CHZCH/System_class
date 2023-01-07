@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Code\\操作系统课程设计\\IO\\ConsoleApp\\ConsoleApp\\ConsoleApp.csproj",
+      "projectUniqueName": "C:\\Code\\操作系统课程设计\\--------\\IO\\ConsoleApp\\ConsoleApp\\ConsoleApp.csproj",
       "projectName": "ConsoleApp",
-      "projectPath": "C:\\Code\\操作系统课程设计\\IO\\ConsoleApp\\ConsoleApp\\ConsoleApp.csproj",
+      "projectPath": "C:\\Code\\操作系统课程设计\\--------\\IO\\ConsoleApp\\ConsoleApp\\ConsoleApp.csproj",
       "packagesPath": "C:\\Users\\ZCH\\.nuget\\packages\\",
-      "outputPath": "C:\\Code\\操作系统课程设计\\IO\\ConsoleApp\\ConsoleApp\\obj\\",
+      "outputPath": "C:\\Code\\操作系统课程设计\\--------\\IO\\ConsoleApp\\ConsoleApp\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\ZCH\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -27,10 +27,12 @@ public class LFUCache
         int index = 0;
         for (; index < nums.Length; index++)
         {
-            Put(nums[index] - '0',nums[index] - '0');
+            Put(nums[index] - '0', nums[index] - '0');
         }
+
         Print();
     }
+
     private void PromoteNode(LinkedListNode<Item> node) //增加节点的使用频率，将此节点移动到属于更高频率的链表中去
     {
         int currFreq = node.Value.Freq;
@@ -81,13 +83,13 @@ public class LFUCache
         }
 
         LinkedListNode<Item> node;
-        if (!_nodeTracker.ContainsKey(key))//若此节点之前并未被插入
+        if (!_nodeTracker.ContainsKey(key)) //若此节点之前并未被插入
         {
             if (_nodeTracker.Count == _capacity)
             {
                 Console.WriteLine($"发生缺页且当前表的容量已满，淘汰{_values[_minFreq].First.Value.Key}");
-                _nodeTracker.Remove(_values[_minFreq].First.Value.Key);//移除最少使用的节点
-                _values[_minFreq].RemoveFirst();//更新最小频率对应的链表
+                _nodeTracker.Remove(_values[_minFreq].First.Value.Key); //移除最少使用的节点
+                _values[_minFreq].RemoveFirst(); //更新最小频率对应的链表
                 _time++;
             }
 

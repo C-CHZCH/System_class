@@ -41,7 +41,6 @@ public class Ffa//首次适应算法
             t.Name = num[0];
             t.Len = int.Parse(num[1]);
             bool isDistribute = false;
-            Console.WriteLine(_list.Count());
             for (int i = 0; i < _list.Count(); i++)
             {
                 if (_list[i].Len >= t.Len)

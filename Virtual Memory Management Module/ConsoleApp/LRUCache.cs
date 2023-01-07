@@ -21,6 +21,7 @@ public class LRUCache {
         }
         Print();
     }
+    
     public int Get(int key) {
         if (_dict.ContainsKey(key)) {
             _nums.Remove(key);
@@ -35,6 +36,7 @@ public class LRUCache {
             _nums.Remove(key);
             _nums.AddLast(key);
             _dict[key] = value;//更新哈希表
+            Console.WriteLine("页面中已存在此数据，仅作更新使用频率处理");
         }
         else
         {
